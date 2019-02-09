@@ -58,11 +58,32 @@ class Projects extends Component {
         return(
             <MainContainer>
                 <div className="contents projects">
-                    <div className="row modal-btn-group">
-                        <button className="col-6 modal-btn btn1" onClick={this.handleContent} value="0"><i className="fas fa-comments"></i> RealChat</button>
-                        <button className="col-6 modal-btn btn2" onClick={this.handleContent} value="1"><i className="fas fa-search"></i> SearchApp</button>
-                        <button className="col-6 modal-btn btn2" onClick={this.handleContent} value="2"><i className="fas fa-tasks"></i> Web App</button>
-                        <button className="col-6 modal-btn btn1" onClick={this.handleContent} value="3"><i className="fas fa-desktop"></i> Portfolio</button>
+                    <h1>Projects</h1><hr/>
+                    <div className="flex-container">
+                    <div className="flex-item">
+                    <h2>01</h2>
+                    <h4>Real Chat Application</h4>
+                        <div className="modal-btn"><button className="btn" onClick={this.handleContent} value="0">Detail</button></div>
+                    </div>
+                    <div className="flex-item">
+                    <h2>02</h2>
+                    <h4>Course Search App</h4>
+                        <div className="modal-btn"><button className="btn" onClick={this.handleContent} value="1">Detail</button></div>
+                    </div>
+                    </div>
+                    <div className="flex-container">
+                    <div className="flex-item">
+                    <h2>03</h2>
+                    <h4>Data Management App</h4>
+                        <div className="modal-btn"><button className="btn" onClick={this.handleContent} value="2">Detail</button></div>
+                    </div>
+                    <div className="flex-item">
+                    <h2>04</h2>
+                    <h4>Portfolio Page</h4>
+                        <div className="modal-btn"><button className="btn" onClick={this.handleContent} value="3">Detail</button></div>
+                    </div>
+                    </div>
+                    
                     <Modal 
                         isOpen={this.state.modalIsOpen}
                         onAfterOpen={this.afterOpenModal}
@@ -78,12 +99,11 @@ class Projects extends Component {
                                     <ul>
                                         {lists}
                                     </ul>
-                                    <a className="github-btn" href={github} target="_blank" rel="noopener noreferrer">Github</a>
                                 </div>
+                                <a className="github-btn" href={github} target="_blank" rel="noopener noreferrer">Github</a>
                             </div>
                     </Modal>
                     </div>
-                </div>
             </MainContainer>
         )
     }
