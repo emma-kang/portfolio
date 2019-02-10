@@ -229,6 +229,13 @@ span {
   text-decoration: none;
 }
 @media screen and (max-width: 424px){
+  .btn{
+    margin-top: 1rem;
+  }
+  .flex-container{
+    height: auto;
+    margin: 0;
+  }
   .project-detail .desc {
     font-size: 0.7rem;
   }

@@ -58,7 +58,9 @@ class Projects extends Component {
         return(
             <MainContainer>
                 <div className="contents projects">
+                <div>
                     <h1>Projects</h1><hr/>
+                </div>
                     <div className="flex-container">
                     <div className="flex-item">
                     <h2>01</h2>
