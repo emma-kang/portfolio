@@ -1,0 +1,4 @@
+[submodule "public"]
+	path = public
+	url = https://github.com/emma-kang/emma-kang.github.io.git
+	branch = master
