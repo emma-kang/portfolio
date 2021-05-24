@@ -1,4 +1,4 @@
-baseURL = "localhost"
+baseURL = "https://emma-kang.github.io"
 title   = "EMMA KANG"
 languageCode = "en-us"
 theme = "hello-friend-ng"
