@@ -30,7 +30,7 @@ The below is the list that I experienced over 2 years and mainly focus on.
 * JavaScript
 * HTML & CSS 
 * Version Control: Git, SVN(Subversion)
-* Issure tracking tool: Jira
+* Issue tracking tool: Jira
 
 ### ***Prior Experience***
 I have an interest in the skills but not fluent. So, I have built small project with them.
