@@ -12,39 +12,117 @@ series:
 - personal project
 aliases:
 - /projects/spring-booking-webservice
-draft: true
+draft:
+- true
 ---
 
-2019-06-01 ~ Present 
+This is personal project for study room booking webservice. The purpose of this project is to reinforce the knowledge of Spring framework, security, and Junit testing. 
 
-As a work project, I am responsible to operate the tolling system. The system consists of two web applications and a script process. The main responsibility is improving legacy code and developing new features to the existing program. I developed new functions on the application in clients' request. The details of the work are as follow:
+I am currently working on this project with learning testing online lecture. 
 
-### Scripts 
+```java
+@Service
+public class BookingServiceImpl implements BookingService {
+    final static Logger logger = LoggerFactory.getLogger(BookingServiceImpl.class);
+    private final BookingDAO bookingDAO;
 
-- Toll transaction data handling, email sender, SFTP file exchange, and other scheduled process 
-- Java, shell scripts, Quartz job scheduler 
+    public BookingServiceImpl(BookingDAO bookingDAO) {
+        this.bookingDAO = bookingDAO;
+    }
 
-### Web Applications 
+    @Override
+    public BookingDTO getBookingInfoByUserId(int userid) {
+        return bookingDAO.getBookingInfoByUserId(userid);
+    }
 
-- Back Office web application and Customer web site 
-- Fix bug and develop new feature on exisiting application 
-- Create release version and deploy to production 
-- Java, Spring Boot, Spring MVC, maven, Node.js, Swagger
-- Backbone.js(Marionette framework), HTML/CSS, JavaScript, JQuery, zk framework 
-- PM2 (production process manager for Node.js), Grunt
-- Tomcat 8, Apache
-- Azure server environment
+    @Override
+    public List<BookingDTO> getBookingInfoByRoom(int roomid) {
+        return bookingDAO.getBookingInfoByRoom(roomid);
+    }
 
-### Report
+    @Override
+    public Map<String, String> addNewBooking(BookingDTO bookingDTO) {
+        Map<String, String> response = new HashMap<>();
+        logger.info("Creating new booking schedule for userID:" + bookingDTO.getUserId());
 
-- Financial and oeprational reports 
-- Improve SQL query to improve performance 
-- Build new SQL query as client's request
-- T-SQL(Microsoft SQL), PL/SQL(Oracle), Jasper reporting tool that is written by Java
+        try {
+            int resultCode = bookingDAO.addNewBooking(bookingDTO);
 
-  
+            if (resultCode == 1) {
+                response.put("status", "201");
+            } else {
+                response.put("status", "500");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("Error occurred while creating new booking" + bookingDTO.toString());
+        }
 
-  
+        return response;
+    }
 
-  
+    @Override
+    public Map<String, String> updateBooking(int bookingId, Map<String, String> info) {
+        Map<String, String> response = new HashMap<>();
+        SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        logger.info("Updating booking schedule for bookId:" + bookingId);
+
+        try {
+            if (info.isEmpty())
+                return null;
+
+            BookingDTO booking = bookingDAO.getBookingInfoByBookingId(bookingId);
+            // convert string to date
+            Date startDateTime = sdFormat.parse(info.get("startTime"));
+            Date endDateTime = sdFormat.parse(info.get("endTime"));
+            // set updated date times
+            booking.setStartTime(startDateTime);
+            booking.setEndTime(endDateTime);
+
+            int resultCode = bookingDAO.updateBooking(booking);
+
+            if (resultCode == 1) {
+                response.put("status", "200");
+            } else {
+                response.put("status", "500");
+                response.put("message", "Error occurred while processing query");
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            logger.error("Error occurring while canceling booking" + e);
+        }
+
+        return response;
+    }
+
+    @Override
+    public Map<String, String> cancelBooking(int bookingId) {
+        Map<String, String> response = new HashMap<>();
+        logger.info("Canceling booking schedule for bookId:" + bookingId);
+
+        try {
+            int resultCode = bookingDAO.cancelBooking(bookingId);
+
+            if (resultCode == 1) {
+                response.put("status", "200");
+            } else {
+                response.put("status", "500");
+                response.put("message", "Error occurred while processing query");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("Error occurring while canceling booking" + e);
+        }
+
+        return response;
+    }
+}
+```
+
+
+
+
+
+
 

@@ -12,39 +12,20 @@ series:
 - work project
 aliases:
 - /projects/paypal-integration
-draft: true
 ---
 
-2019-06-01 ~ Present 
+As a client requested, the customer website needed to support the PayPal method as one of payment. Firstly, I reviewed the PayPal official document and investigate the current system how to apply it. It was decided to use PayPal's smart button through team meetings because it was the simplest way. 
 
-As a work project, I am responsible to operate the tolling system. The system consists of two web applications and a script process. The main responsibility is improving legacy code and developing new features to the existing program. I developed new functions on the application in clients' request. The details of the work are as follow:
+- Modified current system JavaScript code to apply Smart button 
+- Modified payment handling process code in the current system in order to process the result of payment into the system (Payment process controller)
+- Modified current UI on customer website 
+- After PayPal integrated, the back office and financial report were required to modified for PayPal.
 
-### Scripts 
+### Tech Stack
 
-- Toll transaction data handling, email sender, SFTP file exchange, and other scheduled process 
-- Java, shell scripts, Quartz job scheduler 
+- Java, Spring MVC
+- T-SQL 
+- JavaScript, JQuery, jsp, zk framework  
 
-### Web Applications 
-
-- Back Office web application and Customer web site 
-- Fix bug and develop new feature on exisiting application 
-- Create release version and deploy to production 
-- Java, Spring Boot, Spring MVC, maven, Node.js, Swagger
-- Backbone.js(Marionette framework), HTML/CSS, JavaScript, JQuery, zk framework 
-- PM2 (production process manager for Node.js), Grunt
-- Tomcat 8, Apache
-- Azure server environment
-
-### Report
-
-- Financial and oeprational reports 
-- Improve SQL query to improve performance 
-- Build new SQL query as client's request
-- T-SQL(Microsoft SQL), PL/SQL(Oracle), Jasper reporting tool that is written by Java
-
-  
-
-  
-
-  
-
+### Reference
+- [PayPal Docs](https://developer.paypal.com/docs/business/checkout/set-up-standard-payments/)

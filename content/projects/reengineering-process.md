@@ -12,39 +12,29 @@ series:
 - work project
 aliases:
 - /projects/reengineering-process
-draft: true
 ---
 
-2019-06-01 ~ Present 
+As the 3rd data provider changed, related processes in the system were needed to update as new requirements. The processes are an important part in the system since it is associated with toll transactions. Previous processes were designed as SQL procedures but it had a drawback that was hard to track exception. Therefore, new processes were decided to implement as Java processes. 
 
-As a work project, I am responsible to operate the tolling system. The system consists of two web applications and a script process. The main responsibility is improving legacy code and developing new features to the existing program. I developed new functions on the application in clients' request. The details of the work are as follow:
+### Plan 
 
-### Scripts 
+- Investigate the system database table and design new database structure for the transactions 
+- Based on the new data table design, planed Java processes 
 
-- Toll transaction data handling, email sender, SFTP file exchange, and other scheduled process 
-- Java, shell scripts, Quartz job scheduler 
+### Issues 
 
-### Web Applications 
+- After implemented and released to production, it has issues on performance since the process had bad logic to handle huge transaction data. At first, there was no choice but to use the code according to the business logic. 
+- To solve the above issue, refactored all processes in loop code. After refactored the code, the processing time was decreased 3 times than the previous.
 
-- Back Office web application and Customer web site 
-- Fix bug and develop new feature on exisiting application 
-- Create release version and deploy to production 
-- Java, Spring Boot, Spring MVC, maven, Node.js, Swagger
-- Backbone.js(Marionette framework), HTML/CSS, JavaScript, JQuery, zk framework 
-- PM2 (production process manager for Node.js), Grunt
-- Tomcat 8, Apache
-- Azure server environment
+### Tech Stack
 
-### Report
+- T-SQL (Table design, procedures)
+- Java 8 
+- shell scripts
 
-- Financial and oeprational reports 
-- Improve SQL query to improve performance 
-- Build new SQL query as client's request
-- T-SQL(Microsoft SQL), PL/SQL(Oracle), Jasper reporting tool that is written by Java
+I was able to learn how to handle big transaction data in Java source code and also it was a good chance to enhance my knowledge about exception handling.
 
-  
 
-  
 
-  
+
 

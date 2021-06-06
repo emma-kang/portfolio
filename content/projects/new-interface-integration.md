@@ -12,39 +12,27 @@ series:
 - work project
 aliases:
 - /projects/new-interface-integration
-draft: true
 ---
 
-2019-06-01 ~ Present 
+A new interface had to be applied to one type of existing system reporting. The previous reporting system was managing data by connecting to 3rd database. The new interface is to communicate with 3rd party REST API interface. 
 
-As a work project, I am responsible to operate the tolling system. The system consists of two web applications and a script process. The main responsibility is improving legacy code and developing new features to the existing program. I developed new functions on the application in clients' request. The details of the work are as follow:
+### Planing 
 
-### Scripts 
+- Review the API document and plan to implement to existing system
+- Consider exception cases - how to manage each exception 
+- Create flow chart 
 
-- Toll transaction data handling, email sender, SFTP file exchange, and other scheduled process 
-- Java, shell scripts, Quartz job scheduler 
+### Implementation
 
-### Web Applications 
+- Java 8, tomcat 8 
+- Used Apache `HttpClient` 
+- `GET`, `POST`, `DELETE` 
 
-- Back Office web application and Customer web site 
-- Fix bug and develop new feature on exisiting application 
-- Create release version and deploy to production 
-- Java, Spring Boot, Spring MVC, maven, Node.js, Swagger
-- Backbone.js(Marionette framework), HTML/CSS, JavaScript, JQuery, zk framework 
-- PM2 (production process manager for Node.js), Grunt
-- Tomcat 8, Apache
-- Azure server environment
 
-### Report
 
-- Financial and oeprational reports 
-- Improve SQL query to improve performance 
-- Build new SQL query as client's request
-- T-SQL(Microsoft SQL), PL/SQL(Oracle), Jasper reporting tool that is written by Java
 
-  
 
-  
 
-  
+
+
 

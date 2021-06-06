@@ -12,39 +12,97 @@ series:
 - personal project
 aliases:
 - /projects/spring-web-board
-draft: true
 ---
 
-2019-06-01 ~ Present 
+This is personal project for Web board with Spring framework. Users can create/read/update/delete posting on the board. Basically, the web board built with Spring MVC and Thymeleaf template view engine. 
 
-As a work project, I am responsible to operate the tolling system. The system consists of two web applications and a script process. The main responsibility is improving legacy code and developing new features to the existing program. I developed new functions on the application in clients' request. The details of the work are as follow:
+### Tech Stack 
 
-### Scripts 
+- Java Spring MVC
+- MySQL, Hibernate
+- Thymeleaf 
 
-- Toll transaction data handling, email sender, SFTP file exchange, and other scheduled process 
-- Java, shell scripts, Quartz job scheduler 
+``` java
+@Controller
+public class WritePostController {
+    private PostDTO postDTO;
+    private PostService postService;
+    private UserService userService;
 
-### Web Applications 
+    @Autowired
+    public void setUserService(@Qualifier("userService") UserService us) { 
+      this.userService = us; 
+    }
 
-- Back Office web application and Customer web site 
-- Fix bug and develop new feature on exisiting application 
-- Create release version and deploy to production 
-- Java, Spring Boot, Spring MVC, maven, Node.js, Swagger
-- Backbone.js(Marionette framework), HTML/CSS, JavaScript, JQuery, zk framework 
-- PM2 (production process manager for Node.js), Grunt
-- Tomcat 8, Apache
-- Azure server environment
+    @Autowired
+    public void setPostService(@Qualifier("postService") PostService ps) { 
+      this.postService = ps; 
+    }
 
-### Report
+    @RequestMapping(value = "/writepost", method = RequestMethod.GET)
+    public String writePostPage(Model model) {
+        model.addAttribute("postDTO", new PostDTO());
+        return "thymeleaf/writePost";
+    }
 
-- Financial and oeprational reports 
-- Improve SQL query to improve performance 
-- Build new SQL query as client's request
-- T-SQL(Microsoft SQL), PL/SQL(Oracle), Jasper reporting tool that is written by Java
+    @RequestMapping(value = "/writepost", method = RequestMethod.POST)
+    public String writeNewPost(@ModelAttribute final PostDTO postDTO
+                               , final BindingResult bindingResult, final ModelMap model) {
+      
+        this.postDTO = postDTO;
+        Integer userid = getUserIdByName(postDTO.getUsername(), postDTO.getPasswords());
 
-  
+        if(userid == null) {
+            userid = createNewUsers(postDTO.getUsername(), postDTO.getPasswords());
+        }
 
-  
+        if (bindingResult.hasErrors() || postDTO.getErrMsg() != null) {
+            model.addAttribute("errorMsg", postDTO.getErrMsg());
+            return "thymeleaf/writePost";
+        }
 
-  
+        createNewPost(userid);
+
+        model.clear();
+        return "redirect:/";
+    }
+
+    private void createNewPost(Integer userid) {
+        Posts post = new Posts();
+
+        post.setUserid(userid);
+        post.setTitle(postDTO.getTitle());
+        post.setBody(postDTO.getPostbody());
+        post.setPostingDate(Calendar.getInstance().getTime());
+
+        this.postService.addPost(post);
+    }
+
+    private Integer createNewUsers(String username, String passwords) {
+        Users newUser = new Users();
+        newUser.setUsername(username);
+        newUser.setPasswords(passwords);
+        newUser.setCreatedate(Calendar.getInstance().getTime());
+        this.userService.addUser(newUser);
+
+        return newUser.getUserid();
+    }
+
+    private Integer getUserIdByName(String username, String password) {
+        Users existUser = this.userService.getUserByName(username);
+        Integer userId = null;
+
+        if (existUser != null) {
+            if (!existUser.getPasswords().equals(password)){
+                postDTO.setErrMsg("Password not match with stored data");
+            }
+        }
+
+        return userId;
+    }
+```
+
+For more details, please review [Github](https://github.com/emma-kang/spring-web-board)
+
+
 
